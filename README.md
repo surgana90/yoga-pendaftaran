@@ -21,7 +21,6 @@ Tabel utama: `pendaftaran_workshop`
 
 | Field | Keterangan |
 |------|------------|
-| id_pendaftaran | ID unik pendaftaran |
 | nama_lengkap | Nama peserta |
 | email | Email aktif |
 | level_pelatihan | Level pelatihan |
@@ -73,7 +72,7 @@ project-workshop/
 4. Jalankan Apache & MySQL
 5. Buka browser dan akses:
    ```
-   http://localhost/project-workshop
+   [http://localhost/Web_workshop/index.php]
    ```
 
 ---
