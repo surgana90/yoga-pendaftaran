@@ -44,9 +44,9 @@ Contoh penggunaan class/id:
 ### Screenshot (placeholder)
 Berikut screenshot placeholder yang saya tambahkan di folder `docs/` — Anda bisa mengganti file ini dengan screenshot aktual dari browser.
 
-- Home: `index.php` — ![Home](docs/home.svg)
-- Form: `form.php` — ![Form](docs/form.svg)
-- Hasil: `process.php` — ![Result](docs/result.svg)
+- Home: `index.php` — ![Home](docs/home.png)
+- Form: `form.php` — ![Form](docs/form.png)
+- Hasil: `process.php` — ![Result](docs/result.png)
 
 (Untuk menggunakan screenshot nyata: ambil screenshot layar Anda, simpan di `docs/` dengan nama `home.png`, `form.png`, `result.png`, lalu gantikan link di atas jika perlu.)
 
