@@ -3,6 +3,38 @@
  * Tujuan: Validasi form di sisi klien sebelum dikirim.
  */
 
+/* Toast utility: showToast(type, message, durationMs) */
+function showToast(type, message, duration = 4500) {
+    if (!document) return;
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast ' + (type === 'success' ? 'toast--success' : 'toast--error');
+
+    const icon = document.createElement('div');
+    icon.className = 'toast-icon';
+    icon.innerHTML = type === 'success' ? '<i class="fa-solid fa-circle-check" style="color:#28a745"></i>' : '<i class="fa-solid fa-circle-exclamation" style="color:#dc3545"></i>';
+
+    const msg = document.createElement('div');
+    msg.className = 'toast-message';
+    msg.textContent = message;
+
+    toast.appendChild(icon);
+    toast.appendChild(msg);
+    container.appendChild(toast);
+
+    // Auto remove
+    setTimeout(() => {
+        toast.classList.add('toast-hide');
+        setTimeout(() => toast.remove(), 320);
+    }, duration);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registrationForm');
     
@@ -64,15 +96,70 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            // Jika ada validasi yang gagal, hentikan pengiriman form
+            // Jika ada validasi yang gagal, hentikan pengiriman form dan fokus ke error pertama
             if (!isValid) {
                 event.preventDefault();
-                alert("Mohon periksa kembali isian form Anda!"); // Pesan konfirmasi/peringatan sederhana
+                const firstError = Array.from(document.querySelectorAll('.error-message')).find(el => el.textContent.trim() !== '');
+                if (firstError) {
+                    const inputId = firstError.id.replace('Error', '');
+                    const field = document.getElementById(inputId);
+                    if (field) {
+                        field.focus();
+                        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
             } else {
-                // Interaksi sederhana: Konfirmasi sebelum kirim (lapisan tambahan)
+                // Konfirmasi sebelum kirim (lapisan tambahan)
                 if (!confirm("Apakah Anda yakin data pendaftaran sudah benar?")) {
                     event.preventDefault();
                 }
+            }
+        });
+    }
+});
+
+// Expose to global so other pages can call showToast
+window.showToast = showToast;
+
+// Navbar toggle behavior (for small screens)
+document.addEventListener('DOMContentLoaded', function(){
+    var navToggle = document.getElementById('navToggle');
+    var navbar = document.getElementById('navbar');
+    var navMenu = document.getElementById('navMenu');
+    if (navToggle && navbar && navMenu) {
+        navToggle.addEventListener('click', function(){
+            var isOpen = navbar.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            // swap icon between bars and x
+            try {
+                var ic = navToggle.querySelector('i');
+                if (ic) {
+                    if (isOpen) {
+                        ic.classList.remove('fa-bars');
+                        ic.classList.add('fa-xmark');
+                    } else {
+                        ic.classList.remove('fa-xmark');
+                        ic.classList.add('fa-bars');
+                    }
+                }
+            } catch (e) { /* ignore */ }
+        });
+
+        // Close menu when clicking a nav link (mobile)
+        navMenu.addEventListener('click', function(e){
+            if (e.target.tagName === 'A' && window.innerWidth <= 700) {
+                navbar.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close on outside click
+        document.addEventListener('click', function(e){
+            if (!navbar.contains(e.target) && navbar.classList.contains('open')){
+                navbar.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
             }
         });
     }

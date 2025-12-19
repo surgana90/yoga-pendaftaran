@@ -19,11 +19,14 @@ $active_page = "about";
     </header>
 
     <nav id="navbar">
-        <ul>
-            <li class="<?php echo ($active_page == 'home' ? 'active' : ''); ?>"><a href="index.php">Beranda</a></li>
-            <li class="<?php echo ($active_page == 'form' ? 'active' : ''); ?>"><a href="form.php">Daftar Sekarang</a></li>
-            <li class="<?php echo ($active_page == 'about' ? 'active' : ''); ?>"><a href="about.php">Tentang Kami</a></li>
-        </ul>
+        <button id="navToggle" class="navbar-toggle" aria-expanded="false" aria-controls="navMenu"><i class="fa-solid fa-bars"></i><span class="sr-only">Menu</span></button>
+        <div id="navMenu" class="nav-menu">
+            <ul>
+                <li class="<?php echo ($active_page == 'home' ? 'active' : ''); ?>"><a href="index.php">Beranda</a></li>
+                <li class="<?php echo ($active_page == 'form' ? 'active' : ''); ?>"><a href="form.php" class="nav-cta">Daftar Sekarang</a></li>
+                <li class="<?php echo ($active_page == 'about' ? 'active' : ''); ?>"><a href="about.php">Tentang Kami</a></li>
+            </ul>
+        </div>
     </nav>
 
     <div id="container">

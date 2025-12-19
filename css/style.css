@@ -49,42 +49,112 @@ body {
 	text-align: center;
 }
 
-/* Navbar */
+/* Navbar (more visible) */
 #navbar{
-	background: transparent;
-	margin-top: 8px;
+	background: #ffffff;
+	margin: 14px auto 18px;
+	padding: 8px 12px;
+	border-radius: 12px;
+	box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+	max-width: var(--max-width);
+	border: 1px solid rgba(15,23,36,0.04);
 }
 
 #navbar ul{
 	list-style:none;
-	padding: 8px 20px;
+	padding: 6px 14px;
 	margin: 0;
 	display:flex;
-	gap: 12px;
+	gap: 8px;
 	justify-content:center;
+	align-items:center;
 	flex-wrap:wrap;
+	overflow: auto;
 }
 
-#navbar li{ }
+/* Screen-reader only */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Navbar toggle button for small screens */
+.navbar-toggle{
+	display:none;
+	background: transparent;
+	border: none;
+	font-size: 1.2rem;
+	color: var(--primary-dark);
+	padding: 8px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.nav-menu{display:block}
+
+/* When navbar has .open (small screens), show menu as column */
+#navbar.open .nav-menu{display:block}
+
+/* Small-screen behavior */
+@media (max-width:700px){
+	#navbar{background: transparent; box-shadow: none; border: none; margin: 8px 12px}
+	.navbar-toggle{display:inline-flex;align-items:center;gap:8px}
+	/* slide transition: hide by max-height instead of display for smooth animation */
+	.nav-menu{display:block;width:100%;max-height:0;overflow:hidden;transition:max-height .32s cubic-bezier(.2,.9,.2,1), opacity .22s ease}
+	.nav-menu{opacity:0}
+	#navbar.open .nav-menu{max-height:420px;opacity:1}
+	#navbar ul{flex-direction:column;gap:6px;padding:8px 6px;background:rgba(255,255,255,0.98);border-radius:8px}
+	#navbar a{padding:10px 12px}
+}
+
+/* Mobile: staggered link fade-in when menu opens */
+@media (max-width:700px){
+	/* diagonal + slight scale for a more lively stagger */
+	#navbar .nav-menu ul li{opacity:0; transform: translate3d(-10px,8px,0) scale(.985); transition: opacity .34s cubic-bezier(.2,.9,.2,1), transform .34s cubic-bezier(.2,.9,.2,1);}
+	#navbar.open .nav-menu ul li{opacity:1; transform: translate3d(0,0,0) scale(1);}
+	/* slightly longer stagger delays for a smooth cascade */
+	#navbar.open .nav-menu ul li:nth-child(1){transition-delay:.03s}
+	#navbar.open .nav-menu ul li:nth-child(2){transition-delay:.08s}
+	#navbar.open .nav-menu ul li:nth-child(3){transition-delay:.13s}
+	#navbar.open .nav-menu ul li:nth-child(4){transition-delay:.18s}
+	#navbar.open .nav-menu ul li:nth-child(5){transition-delay:.23s}
+	#navbar.open .nav-menu ul li:nth-child(6){transition-delay:.28s}
+	#navbar.open .nav-menu ul li:nth-child(7){transition-delay:.33s}
+	#navbar.open .nav-menu ul li:nth-child(8){transition-delay:.38s}
+}
+
+/* list item wrapper left intentionally empty (removed redundant rule) */
 
 #navbar a{
-	color: #fff;
+	color: #0f1724;
 	text-decoration:none;
 	font-weight:600;
-	padding:8px 14px;
-	border-radius:8px;
-	background: rgba(255,255,255,0.06);
-	transition: all .18s ease-in-out;
+	padding:10px 16px;
+	border-radius:10px;
+	background: transparent;
+	transition: all .16s ease-in-out;
 	display:inline-block;
+	border: 1px solid transparent;
 }
 
-#navbar a:hover{transform:translateY(-2px);background: rgba(255,255,255,0.12)}
-
-/* active li gets a stronger background */
-#navbar li.active a{
-	background: #fff;
+#navbar a:hover{
+	transform: translateY(-3px);
+	background: rgba(13,110,253,0.06);
 	color: var(--primary-dark);
-	box-shadow: 0 6px 18px rgba(13,110,253,0.12);
+	box-shadow: 0 6px 16px rgba(13,110,253,0.06);
+}
+
+/* active li gets a filled primary pill */
+#navbar li.active a{
+	background: linear-gradient(180deg,var(--primary), var(--primary-dark));
+	color: #fff;
+	box-shadow: 0 10px 30px rgba(13,110,253,0.14);
+	transform: none;
+}
+
+/* Emphasize CTA style when used as a standalone class */
+.nav-cta{
+	background: linear-gradient(180deg,var(--primary), var(--primary-dark));
+	color: #fff !important;
+	box-shadow: 0 8px 20px rgba(13,110,253,0.14);
+	border: none;
 }
 
 /* Main card */
@@ -170,4 +240,39 @@ body {
 @media (max-width:420px){
 	#navbar ul{justify-content:center}
 	#header h1{text-align:center}
+}
+
+/* Toast notifications */
+.toast-container{
+	position: fixed;
+	right: 20px;
+	bottom: 24px;
+	z-index: 9999;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.toast{
+	min-width: 260px;
+	max-width: 360px;
+	background: #fff;
+	color: #111;
+	padding: 12px 14px;
+	border-radius: 10px;
+	box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+	display:flex;
+	gap:10px;
+	align-items:center;
+	border-left: 4px solid var(--primary);
+	font-weight:600;
+}
+.toast--success{border-left-color: #28a745}
+.toast--error{border-left-color: #dc3545}
+.toast .toast-icon{font-size:1.1rem;opacity:0.95}
+.toast .toast-message{flex:1;font-size:0.95rem;color:var(--muted);font-weight:600}
+.toast-hide{
+	animation: toastOut .28s ease-in forwards;
+}
+@keyframes toastOut{
+	to{opacity:0; transform: translateY(8px) scale(.98)}
 }
