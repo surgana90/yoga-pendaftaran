@@ -3,7 +3,7 @@
 ## 1. Halaman Judul
 - Nama Aplikasi: Workshop Coding Dasar
 - Nama & NIM: Yoga Surgana — 1002250078
-- Kelas: [Isi kelas Anda]
+- Kelas: Eksekutif | Teknologi Informasi
 
 ## 2. Pendahuluan
 ### Latar Belakang
@@ -152,5 +152,3 @@ Project ini tidak menggunakan OOP — proses ditulis dengan pendekatan prosedura
 
 
 ---
-
-*Laporan ini dibuat otomatis sebagai ringkasan implementasi. Anda dapat mengedit file `REPORT.md` di folder project untuk menambahkan nama, NIM, screenshot, dan catatan tambahan.*
