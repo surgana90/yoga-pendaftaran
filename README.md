@@ -51,7 +51,7 @@ Tabel utama: `pendaftaran_workshop`
 
 ## 📁 Struktur Folder
 ```text
-project-workshop/
+Web-workshop/
 ├── index.php        # Halaman Beranda
 ├── daftar.php       # Form pendaftaran
 ├── hasil.php        # Hasil pendaftaran
