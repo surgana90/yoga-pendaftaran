@@ -3,7 +3,8 @@
 ## 1. Halaman Judul
 - Nama Aplikasi: Workshop Coding Dasar
 - Nama & NIM: Yoga Surgana — 1002250078
-- Kelas: [Isi kelas Anda]
+- Kelas: Eksekutif
+- Preodi : Teknologi Informasi
 
 ## 2. Pendahuluan
 ### Latar Belakang
