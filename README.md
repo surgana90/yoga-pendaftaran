@@ -120,7 +120,3 @@ Tidak diperkenankan digunakan untuk tujuan komersial tanpa izin.
 
 ---
 
-## 👨‍💻 Author
-Nama : (Isi Nama)  
-NIM  : (Isi NIM)  
-Kelas: (Isi Kelas)
